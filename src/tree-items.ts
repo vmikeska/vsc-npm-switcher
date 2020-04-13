@@ -36,11 +36,11 @@ export class DependencyTreeItem extends vscode.TreeItem {
 
     private get iconFile() {
         if (this.isUpdateRunning) {
-            return 'hour.svg';        
+            return 'hour.png';        
         }
 
         const isNumberVersion = Utils.isNumberVersion(this.version);
-        const regular = isNumberVersion ? 'remote.svg' : 'local.svg';
+        const regular = isNumberVersion ? 'remote.png' : 'local.png';
         return regular;
     }
 }

@@ -1,9 +1,14 @@
 {
-	"name": "env-switcher",
-	"displayName": "Switch between local and remote packages",
-	"description": "Tool for one-click switching between local and remote packages for debugging purposes",
+	"name": "vsc-npm-switcher",
+	"displayName": "Remote-Local npm packages switcher",
+	"description": "Visual Studio Code plugin for switching between local and remote npm packages for debugging purposes",
 	"publisher": "mikeska-tech",
-	"version": "1.0.0",
+	"repository": {
+		"type": "git",
+		"url": "https://github.com/vmikeska/vsc-npm-switcher.git"
+	},
+	"version": "1.0.1",
+	"icon": "resources/title.png",
 	"engines": {
 		"vscode": "^1.44.0"
 	},
@@ -20,7 +25,7 @@
 				{
 					"id": "dependencyDebugger",
 					"title": "Dependency debugger",
-					"icon": "resources/icon.svg"
+					"icon": "resources/icon.png"
 				}
 			]
 		},

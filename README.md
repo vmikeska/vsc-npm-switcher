@@ -1,2 +1,18 @@
-# vsc-npm-switcher
-Visual Studio Code plugin for switching between local and remote npm packages for debugging purposes
+# Remote-Local NPM packages switcher
+Tree view plugin providing possibility to switch between remote and local NPM packages.
+
+This is intended for debugging and development purposes of NPM packages.
+
+
+#### Options:
+Before use, actual packages must be listed.
+
+> dependencyDebugger.libraries
+```
+[
+    {
+        "name": "@angular/common",
+        "path": "../test-lib/@angular/common"
+    }
+]
+```
