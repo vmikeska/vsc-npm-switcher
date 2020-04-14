@@ -1,5 +1,8 @@
 # Change Log
-All notable changes to this project will be documented in this file.
+All versions listed
+
+## [1.1.0]
+- Reload after the configuration change
 
 ## [1.0.1]
 > 2020-04-13

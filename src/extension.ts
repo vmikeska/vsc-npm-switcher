@@ -17,38 +17,30 @@ export function activate(context: vscode.ExtensionContext) {
 	// let disposable = vscode.commands.registerCommand('env-switcher.helloWorld', async () => {
 	// 	// The code you place here will be executed every time your command is executed
 
-	// 	// Display a message box to the user
-
-
-	// 	let files = await vscode.window.showOpenDialog({});
-	// 	if (files) {
-	// 		let file = files[0];
-	// 		let str = file.toString();
-	// 		vscode.window.showInformationMessage(str);
-	// 	}		
-		
-	// });
-
 	let folderPath = vscode.workspace.rootPath;
 	if (!folderPath) {
 		return;
 	}
 
 	let tv = new TreeProvider(folderPath);
-	// let tv = new TreeProvider(`C:\\S\\vsc-plugin\\test-project`);
+
+	vscode.workspace.onDidChangeConfiguration(event => {
+		let affected = event.affectsConfiguration("dependencyDebugger.libraries");
+		if (affected) {
+			tv.updateTree();
+		}
+	});
 
 	vscode.window.registerTreeDataProvider('npm-switcher', tv);
-
-	
 
 	vscode.commands.registerCommand('npm-switcher.toLocal', (args) => tv.toLocal(args));
 	vscode.commands.registerCommand('npm-switcher.toRemoteLatest', (args) => tv.toRemoteLatest(args));
 	vscode.commands.registerCommand('npm-switcher.toRemoteCustom', (args) => tv.toRemoteCustom(args));
-
+	
 	//todo:
 	// context.subscriptions.push(disposable);
 }
 
 // this method is called when your extension is deactivated
-export function deactivate() {}
+export function deactivate() { }
 

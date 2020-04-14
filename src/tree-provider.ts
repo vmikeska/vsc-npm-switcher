@@ -122,7 +122,7 @@ export class TreeProvider implements vscode.TreeDataProvider<vscode.TreeItem> {
         rimraf.sync(packageDir);
     }
 
-    private updateTree() {
+    public updateTree() {
         this._onDidChangeTreeData.fire();
     }
 
