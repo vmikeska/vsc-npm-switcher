@@ -37,8 +37,11 @@ Before the first use, you have to configure the actual libraries, which you want
 ]
 ```
 
+Amount of re-runs of NPM install in case if one fails. (usually network error or a local process hanging on a file)
+> dependencyDebugger.maxInstallAttempts
+
+
 ### Ready to hear about possible improvements
 It's just been released, so gonna still a bit work on the design, but I am ready to hear some tips on how to improve and be glad for every bug reported.
-Currently occasionally crashing when switching (like 1 out of 10), this is caused by console command executed, NPM INSTALL, most possibly because some file lock still hanging on the file. Sometimes by network error when downloading.
 
 May the plugin be with you!
