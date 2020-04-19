@@ -1,5 +1,5 @@
 
-##VSC plugin to switch NPM references between remote and local packages
+## VSC plugin to switch NPM references between remote and local packages
 Your comments are welcomed at the project root page [https://mikeska.tech/posts/vsc-plugin-switch-local-remote-packages-npm
 ](https://mikeska.tech/posts/vsc-plugin-switch-local-remote-packages-npm)
 
