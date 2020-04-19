@@ -70,12 +70,13 @@
 				"properties": {
 					"dependencyDebugger.libraries": {
 						"type": "array",
-						"default": [
-							{
-								"name": "@angular/common",
-								"path": "../test-lib/@angular/common"
-							}
-						]
+						"default": [],
+						"description": "Definition of libraries to display"
+					},
+					"dependencyDebugger.maxInstallAttempts": {
+						"type": "integer",
+						"default": 2,
+						"description": "Max amount of attempts to install package on one switch."
 					}
 				}
 			}

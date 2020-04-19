@@ -3,13 +3,13 @@
 Your comments are welcomed at the project root page [https://mikeska.tech/posts/vsc-plugin-switch-local-remote-packages-npm
 ](https://mikeska.tech/posts/vsc-plugin-switch-local-remote-packages-npm)
 
-### Switch now references between remote and local packages with onc-click ease
+### Switch now references between remote and local packages with one-click ease
 When developing and debugging NPM packages, switching between local and remote reference has always been a big overhead. 
 Now is all that possible with the one-click approach.
 
 This extension appears in the Activity bar of the Visual Studio Code. Just only thing you have to configure is the list of package names and its local path representation.
 
-![picture not found](./resources/npm-switcher-printscreen.png "The repositories layout description")
+![picture not found](./resources/npm-switcher-printscreen.png)
 
 ### The picture says it all
 

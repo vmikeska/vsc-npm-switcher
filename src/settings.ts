@@ -22,5 +22,10 @@ export class Settings {
         return libs;
     }
 
+    public get maxInstallAttempts() {
+        let num = this.settings.get<number>('maxInstallAttempts', 2);
+        return num;
+    }
+
 
 }

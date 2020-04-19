@@ -6,6 +6,7 @@ import { Utils } from './utils';
 import { Settings } from './settings';
 import { DependencyTreeItem, InfoTreeItem } from './tree-items';
 import { PackagesFnc } from './packages-fnc';
+import { InstallManager } from './install-manager';
 
 export class TreeProvider implements vscode.TreeDataProvider<vscode.TreeItem> {
     constructor(private workspaceRoot: string) {
@@ -19,7 +20,8 @@ export class TreeProvider implements vscode.TreeDataProvider<vscode.TreeItem> {
 
     private settings = new Settings();
     private packagesFnc: PackagesFnc;
-    private updatedPackageName = '';
+    private installs = new InstallManager();
+
 
     private get packageFile() {
         const p = path.join(this.workspaceRoot, this.packageFileName);
@@ -27,7 +29,7 @@ export class TreeProvider implements vscode.TreeDataProvider<vscode.TreeItem> {
     }
 
     private cs = vscode.TreeItemCollapsibleState;
-    
+
     getTreeItem(element: DependencyTreeItem): vscode.TreeItem {
         return element;
     }
@@ -83,22 +85,30 @@ export class TreeProvider implements vscode.TreeDataProvider<vscode.TreeItem> {
     }
 
     private async switchPackageAsync(pckgName: string, version: string) {
-
-        this.updatedPackageName = pckgName;
+        this.installs.start(pckgName);
 
         this.deletePackageDir(pckgName);
 
         this.packagesFnc.writePackageVersion(pckgName, version);
+        this.updateTree();
+
+        this.singleNpmInstall(pckgName);
+    }
+
+    private singleNpmInstall(pckgName: string) {
         this.packagesFnc.installNpmAsync(pckgName)
             .then(() => {
-                this.updatedPackageName = '';
+                this.installs.finish(pckgName);                
                 this.updateTree();
             })
             .catch((err) => {
-                this.updatedPackageName = '';
-                this.updateTree();
+                if (this.installs.canRunInstallAttempt(pckgName)) {
+                    this.singleNpmInstall(pckgName);
+                } else {
+                    this.installs.finish(pckgName);
+                    this.updateTree();
+                }
             });
-        this.updateTree();
     }
 
     private getLocalLibDir(pckgName: string) {
@@ -118,7 +128,7 @@ export class TreeProvider implements vscode.TreeDataProvider<vscode.TreeItem> {
     }
 
     private deletePackageDir(pckgName: string) {
-        let packageDir = path.join(this.workspaceRoot, 'node_modules', pckgName);
+        const packageDir = path.join(this.workspaceRoot, 'node_modules', pckgName);
         rimraf.sync(packageDir);
     }
 
@@ -128,13 +138,10 @@ export class TreeProvider implements vscode.TreeDataProvider<vscode.TreeItem> {
 
     private async getLatestPackageVersionAsync(pckgName: string) {
         const latestVersionCmd = `npm view ${pckgName} version`;
-        let latest = await Utils.getResultFromCommand(latestVersionCmd);
+        const latest = await Utils.getResultFromCommand(latestVersionCmd);
         return latest.trim();
     }
 
-    /**
-     * Given the path to test-package.json, read all its dependencies and devDependencies.
-     */
     private getDepsInPackageJson(packageJsonPath: string) {
         const pathExists = this.pathExists(packageJsonPath);
         if (!pathExists) {
@@ -152,15 +159,13 @@ export class TreeProvider implements vscode.TreeDataProvider<vscode.TreeItem> {
             return [];
         }
 
-        // const packagesNames = Object.keys(dependencies);
         const libsDefinition = this.settings.getLibs();
         const packagesNames = libsDefinition?.map((l) => { return l.name; });
 
-
-        let items = packagesNames.map(npmPackageName => {
-            const version = dependencies[npmPackageName];
-            const isBeingUpdated = this.updatedPackageName === npmPackageName;
-            const item = new DependencyTreeItem(npmPackageName, version, this.cs.Collapsed, isBeingUpdated);
+        const items = packagesNames.map(pckgName => {
+            const version = dependencies[pckgName];
+            const isBeingUpdated = this.installs.isRunning(pckgName);
+            const item = new DependencyTreeItem(pckgName, version, this.cs.Collapsed, isBeingUpdated);
             return item;
         });
         return items;
