@@ -1,6 +1,10 @@
 # Change Log
 All versions listed
 
+## [1.3.1]
+> 2020-12-29
+- Fixed null check bug
+
 ## [1.2.0]
 > 2020-04-19
 
