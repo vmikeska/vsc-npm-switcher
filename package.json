@@ -7,7 +7,7 @@
 		"type": "git",
 		"url": "https://github.com/vmikeska/vsc-npm-switcher.git"
 	},
-	"version": "1.2.0",
+	"version": "1.3.0",
 	"icon": "resources/title.png",
 	"engines": {
 		"vscode": "^1.44.0"
