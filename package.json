@@ -1,114 +1,115 @@
 {
-	"name": "vsc-npm-switcher",
-	"displayName": "Remote-Local npm packages switcher",
-	"description": "Visual Studio Code plugin for switching between local and remote npm packages for debugging purposes",
-	"publisher": "mikeska-tech",
-	"repository": {
-		"type": "git",
-		"url": "https://github.com/vmikeska/vsc-npm-switcher.git"
-	},
-	"version": "1.3.1",
-	"icon": "resources/title.png",
-	"engines": {
-		"vscode": "^1.44.0"
-	},
-	"categories": [
-		"Other"
-	],
-	"activationEvents": [
-		"onView:npm-switcher"
-	],
-	"main": "./out/extension.js",
-	"contributes": {
-		"viewsContainers": {
-			"activitybar": [
-				{
-					"id": "dependencyDebugger",
-					"title": "Dependency debugger",
-					"icon": "resources/icon.png"
-				}
-			]
-		},
-		"views": {
-			"dependencyDebugger": [
-				{
-					"id": "npm-switcher",
-					"name": "NPM packages switcher"
-				}
-			]
-		},
-		"commands": [
-			{
-				"command": "npm-switcher.toLocal",
-				"title": "Switch to local package"
-			},
-			{
-				"command": "npm-switcher.toRemoteLatest",
-				"title": "Switch to latest remote package"
-			},
-			{
-				"command": "npm-switcher.toRemoteCustom",
-				"title": "Switch to custom remote package"
-			}
-		],
-		"menus": {
-			"view/item/context": [
-				{
-					"command": "npm-switcher.toLocal"
-				},
-				{
-					"command": "npm-switcher.toRemoteLatest"
-				},
-				{
-					"command": "npm-switcher.toRemoteCustom"
-				}
-			]
-		},
-		"configuration": [
-			{
-				"title": "Local packages",
-				"properties": {
-					"dependencyDebugger.libraries": {
-						"type": "array",
-						"default": [],
-						"description": "Definition of libraries to display"
-					},
-					"dependencyDebugger.maxInstallAttempts": {
-						"type": "integer",
-						"default": 2,
-						"description": "Max amount of attempts to install package on one switch."
-					}
-				}
-			}
-		]
-	},
-	"scripts": {
-		"vscode:prepublish": "npm run compile",
-		"compile": "tsc -p ./",
-		"lint": "eslint src --ext ts",
-		"watch": "tsc -watch -p ./",
-		"pretest": "npm run compile && npm run lint",
-		"test": "node ./out/test/runTest.js"
-	},
-	"devDependencies": {
-		"@types/glob": "^7.1.1",
-		"@types/lodash": "^4.14.149",
-		"@types/mocha": "^7.0.2",
-		"@types/node": "^13.11.0",
-		"@types/npm": "^2.0.31",
-		"@types/rimraf": "^3.0.0",
-		"@types/vscode": "^1.44.0",
-		"@typescript-eslint/eslint-plugin": "^2.26.0",
-		"@typescript-eslint/parser": "^2.26.0",
-		"eslint": "^6.8.0",
-		"glob": "^7.1.6",
-		"mocha": "^7.1.1",
-		"typescript": "^3.8.3",
-		"vscode-test": "^1.3.0"
-	},
-	"dependencies": {
-		"lodash": "^4.17.15",
-		"npm": "^6.14.4",
-		"rimraf": "^3.0.2"
-	}
+  "name": "vsc-npm-switcher",
+  "displayName": "Remote-Local npm packages switcher",
+  "description": "Visual Studio Code plugin for switching between local and remote npm packages for debugging purposes",
+  "publisher": "mikeska-tech",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/vmikeska/vsc-npm-switcher.git"
+  },
+  "version": "1.3.1",
+  "icon": "resources/title.png",
+  "engines": {
+    "vscode": "^1.44.0"
+  },
+  "categories": [
+    "Other"
+  ],
+  "activationEvents": [
+    "onView:npm-switcher"
+  ],
+  "main": "./out/extension.js",
+  "contributes": {
+    "viewsContainers": {
+      "activitybar": [
+        {
+          "id": "dependencyDebugger",
+          "title": "Dependency debugger",
+          "icon": "resources/icon.png"
+        }
+      ]
+    },
+    "views": {
+      "dependencyDebugger": [
+        {
+          "id": "npm-switcher",
+          "name": "NPM packages switcher"
+        }
+      ]
+    },
+    "commands": [
+      {
+        "command": "npm-switcher.toLocal",
+        "title": "Switch to local package"
+      },
+      {
+        "command": "npm-switcher.toRemoteLatest",
+        "title": "Switch to latest remote package"
+      },
+      {
+        "command": "npm-switcher.toRemoteCustom",
+        "title": "Switch to custom remote package"
+      }
+    ],
+    "menus": {
+      "view/item/context": [
+        {
+          "command": "npm-switcher.toLocal"
+        },
+        {
+          "command": "npm-switcher.toRemoteLatest"
+        },
+        {
+          "command": "npm-switcher.toRemoteCustom"
+        }
+      ]
+    },
+    "configuration": [
+      {
+        "title": "Local packages",
+        "properties": {
+          "dependencyDebugger.libraries": {
+            "type": "array",
+            "default": [],
+            "description": "Definition of libraries to display"
+          },
+          "dependencyDebugger.maxInstallAttempts": {
+            "type": "integer",
+            "default": 2,
+            "description": "Max amount of attempts to install package on one switch."
+          }
+        }
+      }
+    ]
+  },
+  "scripts": {
+    "vscode:prepublish": "npm run compile",
+    "compile": "tsc -p ./",
+    "lint": "eslint src --ext ts",
+    "watch": "tsc -watch -p ./",
+    "pretest": "npm run compile && npm run lint",
+    "test": "node ./out/test/runTest.js"
+  },
+  "devDependencies": {
+    "@types/glob": "^7.1.1",
+    "@types/lodash": "^4.14.149",
+    "@types/mocha": "^7.0.2",
+    "@types/node": "^13.11.0",
+    "@types/npm": "^2.0.31",
+    "@types/rimraf": "^3.0.0",
+    "@types/vscode": "^1.44.0",
+    "@typescript-eslint/eslint-plugin": "^2.26.0",
+    "@typescript-eslint/parser": "^2.26.0",
+    "eslint": "^6.8.0",
+    "glob": "^7.1.6",
+    "mocha": "^7.1.1",
+    "typescript": "^3.8.3",
+    "vscode-test": "^1.3.0"
+  },
+  "dependencies": {
+    "@angular/common": "^11.0.5",
+    "lodash": "^4.17.15",
+    "npm": "^6.14.4",
+    "rimraf": "^3.0.2"
+  }
 }
